@@ -17,8 +17,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="p3O-tp-GpV">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" showsBuildings="NO" showsScale="YES" translatesAutoresizingMaskIntoConstraints="NO" id="p3O-tp-GpV">
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="LmM-wr-BZW"/>
+                                </connections>
                             </mapView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -32,6 +35,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="v1y-TT-dpd"/>
                     <connections>
+                        <outlet property="mapView" destination="p3O-tp-GpV" id="a1C-uC-G7p"/>
                         <segue destination="da7-jB-pNe" kind="show" id="GUL-Zr-fxK"/>
                     </connections>
                 </viewController>
@@ -42,16 +46,16 @@
         <!--Photo Album View Controller-->
         <scene sceneID="AqE-6d-uMK">
             <objects>
-                <viewController id="da7-jB-pNe" customClass="PhotoAlbumViewController" customModule="Virtual_Tourist" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PhotoAlbumViewController" id="da7-jB-pNe" customClass="PhotoAlbumViewController" customModule="Virtual_Tourist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2tL-tN-Zug">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="FCV-Mj-KAR">
-                                <rect key="frame" x="0.0" y="88" width="414" height="189"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="276"/>
                             </mapView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="4OV-Fp-vb0">
-                                <rect key="frame" x="0.0" y="269" width="414" height="544"/>
+                                <rect key="frame" x="0.0" y="372" width="414" height="441"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="NvM-7C-cru">
                                     <size key="itemSize" width="128" height="128"/>
@@ -59,11 +63,18 @@
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
+                                <label key="backgroundView" hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Image Found" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="YFq-oO-fNy">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="441"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="EBt-mc-43D">
                                         <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Lp3-m1-PM9">
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Lp3-m1-PM9" customClass="UIImageView">
                                             <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </collectionViewCellContentView>
@@ -76,11 +87,11 @@
                         <constraints>
                             <constraint firstItem="FCV-Mj-KAR" firstAttribute="top" secondItem="VcM-T1-4uE" secondAttribute="top" id="AGH-FY-cjc"/>
                             <constraint firstItem="VcM-T1-4uE" firstAttribute="trailing" secondItem="4OV-Fp-vb0" secondAttribute="trailing" id="Fmb-9i-0FU"/>
-                            <constraint firstItem="4OV-Fp-vb0" firstAttribute="top" secondItem="VcM-T1-4uE" secondAttribute="top" constant="181" id="MG1-W7-3aR"/>
+                            <constraint firstItem="4OV-Fp-vb0" firstAttribute="top" secondItem="VcM-T1-4uE" secondAttribute="top" constant="284" id="MG1-W7-3aR"/>
                             <constraint firstItem="VcM-T1-4uE" firstAttribute="bottom" secondItem="4OV-Fp-vb0" secondAttribute="bottom" id="MjN-0T-u2w"/>
                             <constraint firstItem="FCV-Mj-KAR" firstAttribute="leading" secondItem="VcM-T1-4uE" secondAttribute="leading" id="NCh-W8-OOj"/>
                             <constraint firstItem="VcM-T1-4uE" firstAttribute="trailing" secondItem="FCV-Mj-KAR" secondAttribute="trailing" id="Waz-El-LNr"/>
-                            <constraint firstItem="FCV-Mj-KAR" firstAttribute="baseline" secondItem="4OV-Fp-vb0" secondAttribute="firstBaseline" constant="8" symbolType="layoutAnchor" id="bI6-Vm-tCo"/>
+                            <constraint firstItem="FCV-Mj-KAR" firstAttribute="baseline" secondItem="4OV-Fp-vb0" secondAttribute="firstBaseline" constant="-8" id="bI6-Vm-tCo"/>
                             <constraint firstItem="4OV-Fp-vb0" firstAttribute="leading" secondItem="VcM-T1-4uE" secondAttribute="leading" id="npw-M2-iDG"/>
                         </constraints>
                     </view>
@@ -91,6 +102,10 @@
                         <barButtonItem key="backBarButtonItem" title="OK" id="Jj0-f1-4Ky"/>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="mapView" destination="FCV-Mj-KAR" id="PQF-zf-NgY"/>
+                        <outlet property="noImageLabel" destination="YFq-oO-fNy" id="dQo-WQ-s2f"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WtZ-BZ-mgI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
