@@ -13,6 +13,8 @@
 		1402D56E256DFDD70092B7C4 /* FlickrPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1402D56D256DFDD70092B7C4 /* FlickrPhoto.swift */; };
 		1402D573256DFE710092B7C4 /* FlickrPhotos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1402D572256DFE710092B7C4 /* FlickrPhotos.swift */; };
 		1402D580256E47890092B7C4 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1402D57F256E47890092B7C4 /* PhotoCollectionViewCell.swift */; };
+		143F785A256EE748002566B3 /* FlickrInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 143F7859256EE748002566B3 /* FlickrInfo.plist */; };
+		143F7861256EFD97002566B3 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143F7860256EFD96002566B3 /* DataController.swift */; };
 		14BAC280256CB6FF00827006 /* FlickrInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 14BAC27F256CB6FF00827006 /* FlickrInfo.plist */; };
 		14F832E6256C442600BC4BB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F832E5256C442600BC4BB9 /* AppDelegate.swift */; };
 		14F832E8256C442600BC4BB9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F832E7256C442600BC4BB9 /* SceneDelegate.swift */; };
@@ -50,6 +52,8 @@
 		1402D56D256DFDD70092B7C4 /* FlickrPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrPhoto.swift; sourceTree = "<group>"; };
 		1402D572256DFE710092B7C4 /* FlickrPhotos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrPhotos.swift; sourceTree = "<group>"; };
 		1402D57F256E47890092B7C4 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
+		143F7859256EE748002566B3 /* FlickrInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = FlickrInfo.plist; sourceTree = "<group>"; };
+		143F7860256EFD96002566B3 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		14BAC27F256CB6FF00827006 /* FlickrInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = FlickrInfo.plist; sourceTree = "<group>"; };
 		14F832E2256C442600BC4BB9 /* Virtual Tourist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Virtual Tourist.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		14F832E5256C442600BC4BB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -97,8 +101,10 @@
 		1402D55A256DF1160092B7C4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				14F832EE256C442700BC4BB9 /* Virtual_Tourist.xcdatamodeld */,
 				1402D562256DF9B30092B7C4 /* Flickr Responses */,
 				1402D55C256DF12A0092B7C4 /* FlickrClient */,
+				143F7860256EFD96002566B3 /* DataController.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -171,8 +177,8 @@
 				14F832F1256C442900BC4BB9 /* Assets.xcassets */,
 				14F832F3256C442900BC4BB9 /* LaunchScreen.storyboard */,
 				14F832F6256C442900BC4BB9 /* Info.plist */,
-				14F832EE256C442700BC4BB9 /* Virtual_Tourist.xcdatamodeld */,
 				14BAC27F256CB6FF00827006 /* FlickrInfo.plist */,
+				143F7859256EE748002566B3 /* FlickrInfo.plist */,
 			);
 			path = "Virtual Tourist";
 			sourceTree = "<group>";
@@ -299,6 +305,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				14F832F5256C442900BC4BB9 /* LaunchScreen.storyboard in Resources */,
+				143F785A256EE748002566B3 /* FlickrInfo.plist in Resources */,
 				14BAC280256CB6FF00827006 /* FlickrInfo.plist in Resources */,
 				14F832F2256C442900BC4BB9 /* Assets.xcassets in Resources */,
 				14F832ED256C442700BC4BB9 /* Main.storyboard in Resources */,
@@ -327,6 +334,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				14F832F0256C442700BC4BB9 /* Virtual_Tourist.xcdatamodeld in Sources */,
+				143F7861256EFD97002566B3 /* DataController.swift in Sources */,
 				14F832EA256C442700BC4BB9 /* MapViewController.swift in Sources */,
 				14F832E6256C442600BC4BB9 /* AppDelegate.swift in Sources */,
 				1402D56E256DFDD70092B7C4 /* FlickrPhoto.swift in Sources */,
