@@ -55,7 +55,7 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="276"/>
                             </mapView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="4OV-Fp-vb0">
-                                <rect key="frame" x="0.0" y="372" width="414" height="441"/>
+                                <rect key="frame" x="0.0" y="372" width="414" height="411"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="NvM-7C-cru">
                                     <size key="itemSize" width="128" height="128"/>
@@ -64,40 +64,59 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <label key="backgroundView" hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Image Found" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="YFq-oO-fNy">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="441"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="411"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="EBt-mc-43D">
-                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotoCollectionViewCell" id="EBt-mc-43D" customClass="PhotoCollectionViewCell" customModule="Virtual_Tourist" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="24" height="20"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Lp3-m1-PM9" customClass="UIImageView">
-                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="24" height="20"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="kb5-rt-KAR" userLabel="Photo Image View">
+                                                    <rect key="frame" x="0.0" y="1" width="24" height="17.5"/>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="kb5-rt-KAR" secondAttribute="trailing" id="BE7-On-WOi"/>
+                                                <constraint firstAttribute="bottom" secondItem="kb5-rt-KAR" secondAttribute="bottom" id="LNQ-qY-P4S"/>
+                                                <constraint firstItem="kb5-rt-KAR" firstAttribute="top" secondItem="Lp3-m1-PM9" secondAttribute="top" id="cAk-3y-QSt"/>
+                                                <constraint firstItem="kb5-rt-KAR" firstAttribute="leading" secondItem="Lp3-m1-PM9" secondAttribute="leading" id="zwD-Ul-NU6"/>
+                                            </constraints>
                                         </collectionViewCellContentView>
+                                        <connections>
+                                            <outlet property="imageView" destination="kb5-rt-KAR" id="ZCl-YK-DIn"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R8x-cr-teQ">
+                                <rect key="frame" x="-5" y="783" width="424" height="30"/>
+                                <state key="normal" title="New Collection"/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="VcM-T1-4uE"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="VcM-T1-4uE" firstAttribute="bottom" secondItem="R8x-cr-teQ" secondAttribute="bottom" id="5Iv-VB-u4S"/>
+                            <constraint firstItem="R8x-cr-teQ" firstAttribute="top" secondItem="4OV-Fp-vb0" secondAttribute="bottom" id="5Tr-Fj-XH8"/>
+                            <constraint firstItem="R8x-cr-teQ" firstAttribute="trailing" secondItem="VcM-T1-4uE" secondAttribute="trailing" constant="5" id="60p-4e-fUk"/>
                             <constraint firstItem="FCV-Mj-KAR" firstAttribute="top" secondItem="VcM-T1-4uE" secondAttribute="top" id="AGH-FY-cjc"/>
                             <constraint firstItem="VcM-T1-4uE" firstAttribute="trailing" secondItem="4OV-Fp-vb0" secondAttribute="trailing" id="Fmb-9i-0FU"/>
                             <constraint firstItem="4OV-Fp-vb0" firstAttribute="top" secondItem="VcM-T1-4uE" secondAttribute="top" constant="284" id="MG1-W7-3aR"/>
-                            <constraint firstItem="VcM-T1-4uE" firstAttribute="bottom" secondItem="4OV-Fp-vb0" secondAttribute="bottom" id="MjN-0T-u2w"/>
                             <constraint firstItem="FCV-Mj-KAR" firstAttribute="leading" secondItem="VcM-T1-4uE" secondAttribute="leading" id="NCh-W8-OOj"/>
+                            <constraint firstItem="VcM-T1-4uE" firstAttribute="leading" secondItem="R8x-cr-teQ" secondAttribute="leading" constant="5" id="PEO-oh-tjk"/>
                             <constraint firstItem="VcM-T1-4uE" firstAttribute="trailing" secondItem="FCV-Mj-KAR" secondAttribute="trailing" id="Waz-El-LNr"/>
                             <constraint firstItem="FCV-Mj-KAR" firstAttribute="baseline" secondItem="4OV-Fp-vb0" secondAttribute="firstBaseline" constant="-8" id="bI6-Vm-tCo"/>
                             <constraint firstItem="4OV-Fp-vb0" firstAttribute="leading" secondItem="VcM-T1-4uE" secondAttribute="leading" id="npw-M2-iDG"/>
                         </constraints>
                     </view>
-                    <toolbarItems>
-                        <barButtonItem title="New Collection" width="412.5" id="Xym-Zs-qcd"/>
-                    </toolbarItems>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" id="VaY-47-NcF">
                         <barButtonItem key="backBarButtonItem" title="OK" id="Jj0-f1-4Ky"/>
                     </navigationItem>
@@ -105,6 +124,7 @@
                     <connections>
                         <outlet property="mapView" destination="FCV-Mj-KAR" id="PQF-zf-NgY"/>
                         <outlet property="noImageLabel" destination="YFq-oO-fNy" id="dQo-WQ-s2f"/>
+                        <outlet property="photoView" destination="4OV-Fp-vb0" id="ift-hn-4nM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WtZ-BZ-mgI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -129,6 +149,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="photo" catalog="system" width="128" height="93"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

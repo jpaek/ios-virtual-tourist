@@ -15,8 +15,13 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var mapView: MKMapView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        setRegion()
+        do {
+         setRegion()
+        } catch {
+            print(error)
+        }
         setTapGesture()
+        FlickrClient.getApiKey()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
