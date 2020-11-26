@@ -20,15 +20,15 @@ class MapViewController: UIViewController, MKMapViewDelegate  {
     
     var fetchedResultsController:NSFetchedResultsController<Pin>!
     
-    fileprivate func setupFetchedResultsController() {
+    fileprivate func setupFetchedResultsController(completion: () -> Void) {
         let fetchRequest:NSFetchRequest<Pin> = Pin.fetchRequest()
         let sortDescriptor = NSSortDescriptor(key: "creationDate", ascending: false)
         fetchRequest.sortDescriptors = [sortDescriptor]
         
         fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: dataController.viewContext, sectionNameKeyPath: nil, cacheName: "pins")
-        fetchedResultsController.delegate = self
         do {
             try fetchedResultsController.performFetch()
+            completion()
         } catch {
             fatalError("The fetch could not be performed: \(error.localizedDescription)")
         }
@@ -36,17 +36,25 @@ class MapViewController: UIViewController, MKMapViewDelegate  {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        do {
-         setRegion()
-        } catch {
-            print(error)
-        }
+        FlickrClient.pageNumber = 1
+        setRegion()
         setTapGesture()
-        setupFetchedResultsController()
+        setupFetchedResultsController(completion:setAnnotations)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupFetchedResultsController(completion:setAnnotations)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         UserDefaults.standard.set([LON: mapView.region.center.longitude, LAT: mapView.region.center.latitude, LON_DELTA: mapView.region.span.longitudeDelta, LAT_DELTA: mapView.region.span.latitudeDelta], forKey: "initRegion")
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        fetchedResultsController = nil
     }
     
     func setRegion() {
@@ -82,6 +90,12 @@ class MapViewController: UIViewController, MKMapViewDelegate  {
         annotation.coordinate = coordinate
         
         mapView.addAnnotation(annotation)
+        
+        let pin = Pin(context: dataController.viewContext)
+        pin.latitude = annotation.coordinate.latitude
+        pin.longitude = annotation.coordinate.longitude
+        pin.creationDate = Date()
+        try? dataController.viewContext.save()
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -107,46 +121,20 @@ class MapViewController: UIViewController, MKMapViewDelegate  {
         
         photoAlbumViewController.coordinate = view.annotation?.coordinate
         photoAlbumViewController.span = mapView.region.span
+        photoAlbumViewController.dataController = dataController
+        do {
+            try fetchedResultsController.performFetch()
+            fetchedResultsController.fetchedObjects?.forEach{ pin in
+                if pin.latitude == view.annotation?.coordinate.latitude && pin.longitude == view.annotation?.coordinate.longitude {
+                    photoAlbumViewController.pin = pin
+                }
+            }
+        } catch {
+            
+        }
+        
         
         self.navigationController!.pushViewController(photoAlbumViewController, animated: true)
     }
 
-}
-
-extension MapViewController:NSFetchedResultsControllerDelegate {
-    
-//    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-//        switch type {
-//        case .insert:
-//            tableView.insertRows(at: [newIndexPath!], with: .fade)
-//            break
-//        case .delete:
-//            tableView.deleteRows(at: [indexPath!], with: .fade)
-//            break
-//        case .update:
-//            tableView.reloadRows(at: [indexPath!], with: .fade)
-//        case .move:
-//            tableView.moveRow(at: indexPath!, to: newIndexPath!)
-//        }
-//    }
-    
-//    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
-//        let indexSet = IndexSet(integer: sectionIndex)
-//        switch type {
-//        case .insert: tableView.insertSections(indexSet, with: .fade)
-//        case .delete: tableView.deleteSections(indexSet, with: .fade)
-//        case .update, .move:
-//            fatalError("Invalid change type in controller(_:didChange:atSectionIndex:for:). Only .insert or .delete should be possible.")
-//        }
-//    }
-
-    
-//    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-//
-//    }
-//
-//    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-//
-//    }
-    
 }

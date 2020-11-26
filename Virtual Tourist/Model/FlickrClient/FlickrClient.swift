@@ -9,6 +9,9 @@ import Foundation
 
 class FlickrClient {
     
+    static var pageNumber:Int?
+    static var maxPage:Int?
+    
     enum Endpoints {
         static let base = "https://www.flickr.com/services/rest/"
         static let imageBase = "https://live.staticflickr.com/"
@@ -21,7 +24,8 @@ class FlickrClient {
         var stringValue: String {
             switch self {
             case .search(let lat, let lon):
-                return Endpoints.base + Endpoints.methodParam + Endpoints.apiKeyParam + "&lat=\(lat)&lon=\(lon)&format=json"
+                
+                return Endpoints.base + Endpoints.methodParam + Endpoints.apiKeyParam + "&lat=\(lat)&lon=\(lon)&format=json&per_page=9&page=\(pageNumber ?? 1)"
             case .image(let serverId, let id, let secret):
                 return Endpoints.imageBase + "\(serverId)/\(id)_\(secret)_t.jpg"
             default:
@@ -59,7 +63,6 @@ class FlickrClient {
             }
             let range = 14..<data.count - 1
             let newData = data.subdata(in: range)
-            print(String(decoding: newData, as: UTF8.self))
             let decoder = JSONDecoder()
             do {
                 let responseObject = try decoder.decode(ResponseType.self, from: newData)
@@ -87,6 +90,7 @@ class FlickrClient {
     class func getPhotos(latitude: Double, longitude: Double, completion: @escaping([FlickrPhoto], Error?) -> Void) {
         let _ = taskForGETRequest(url: Endpoints.search(latitude, longitude).url, responseThpe: PhotoResult.self, completion: {response, error in
             if let response = response {
+                FlickrClient.maxPage = response.photos.pages
                 completion(response.photos.photo, nil)
             } else {
                 completion([], error)
